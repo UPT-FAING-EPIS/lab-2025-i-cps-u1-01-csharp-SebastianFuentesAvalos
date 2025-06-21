@@ -1,8 +1,8 @@
 name: Sonar Continuos Integration
 env:
   DOTNET_VERSION: '8.x'
-  SONAR_ORG: 'upt-faing-epis'
-  SONAR_PROJECT: 'lab-2025-i-cps-u1-01-csharp-sebastianfuentesavalos'
+  SONAR_ORG: 'sebastianfuentes'
+  SONAR_PROJECT: 'apibank-sebastian'
 on:
   push:
     branches: [ "main" ]
