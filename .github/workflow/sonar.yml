@@ -1,0 +1,51 @@
+name: Sonar Continuos Integration
+env:
+  DOTNET_VERSION: '8.x'
+  SONAR_ORG: 'sebastianfuentes'
+  SONAR_PROJECT: 'apibank-sebastian'
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  sonarqube:
+    name: Sonarqube Analisys
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Configurando la versión de NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Instalar Scanner
+        run: dotnet tool install -g dotnet-sonarscanner
+      - name: Build and pack nuget
+        run: |
+          cd Bank
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet pack --configuration Release --output ./nupkg
+      - name: Ejecutar pruebas
+        run: |
+          cd Bank
+          dotnet-sonarscanner begin /k:"${{ env.SONAR_PROJECT }}" /o:"${{ env.SONAR_ORG }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/*/*.xml"
+          dotnet build --no-restore
+          dotnet test --no-build --collect:"XPlat Code Coverage" --results-directory ./TestResults/
+          dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: Release v1.0.0
+          files: Bank/nupkg/*.nupkg
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
