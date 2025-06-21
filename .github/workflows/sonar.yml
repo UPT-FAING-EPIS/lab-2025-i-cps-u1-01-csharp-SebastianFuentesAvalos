@@ -35,10 +35,10 @@ jobs:
       - name: Ejecutar pruebas
         run: |
           cd Bank
-          dotnet-sonarscanner begin /k:"${{ env.SONAR_PROJECT }}" /o:"${{ env.SONAR_ORG }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+          dotnet-sonarscanner begin /k:"${{ env.SONAR_PROJECT }}" /o:"${{ env.SONAR_ORG }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml"
           dotnet build --no-restore
-          dotnet test Bank.Domain.Tests/Bank.Domain.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage.opencover.xml /p:Exclude="[*.Tests]*"
-          ls -la
+          dotnet test --collect:"XPlat Code Coverage" --results-directory ./TestResults/
+          ls -la TestResults/
           find . -name "*.xml" -type f
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
       - name: Create Release
@@ -50,4 +50,4 @@ jobs:
           files: Bank/nupkg/*.nupkg
           generate_release_notes: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
