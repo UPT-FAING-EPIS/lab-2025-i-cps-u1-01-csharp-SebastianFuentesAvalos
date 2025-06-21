@@ -1,0 +1,1 @@
+ R‰C:\Users\Equipo\Documents\SebasFuentes\lab-2025-i-cps-u1-01-csharp-SebastianFuentesAvalos\Bank\Bank.Domain.Tests\Bank.Domain.Tests.csproj¢net9.0òCSharp13
