@@ -34,7 +34,7 @@ jobs:
         run: |
           cd Bank
           dotnet restore 
-          dotnet-sonarscanner begin /k:"${{ env.SONAR_PROJECT }}" /o:"${{ env.SONAR_ORG }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/*/*.xml" /d:sonar.qualitygate.wait=true
+          dotnet-sonarscanner begin /k:"${{ env.SONAR_PROJECT }}" /o:"${{ env.SONAR_ORG }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/*/*.xml"
           dotnet build --no-restore
           dotnet test --no-build --collect:"XPlat Code Coverage" --results-directory ./TestResults/
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
