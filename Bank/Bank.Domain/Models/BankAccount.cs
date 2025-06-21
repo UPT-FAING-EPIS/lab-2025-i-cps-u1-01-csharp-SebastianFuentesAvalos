@@ -2,13 +2,10 @@ namespace Bank.Domain.Models
 {
     public class BankAccount
     {
-        private readonly string m_customerName;
+        private readonly string m_customerName = string.Empty;
         private double m_balance;
         
-        private BankAccount() 
-        { 
-            m_customerName = string.Empty; // Inicializar para evitar warnings
-        }
+        private BankAccount() { }
         
         public BankAccount(string customerName, double balance)
         {
@@ -21,17 +18,14 @@ namespace Bank.Domain.Models
         
         public void Debit(double amount)
         {
-            if (amount > m_balance)
-                throw new ArgumentOutOfRangeException(nameof(amount));
-            if (amount < 0)
-                throw new ArgumentOutOfRangeException(nameof(amount));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(amount, m_balance, nameof(amount));
+            ArgumentOutOfRangeException.ThrowIfNegative(amount, nameof(amount));
             m_balance -= amount;
         }
         
         public void Credit(double amount)
         {
-            if (amount < 0)
-                throw new ArgumentOutOfRangeException(nameof(amount));
+            ArgumentOutOfRangeException.ThrowIfNegative(amount, nameof(amount));
             m_balance += amount;
         }
     }
