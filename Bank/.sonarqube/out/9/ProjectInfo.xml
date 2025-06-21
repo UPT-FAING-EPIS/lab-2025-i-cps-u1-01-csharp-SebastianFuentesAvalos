@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>Bank.Domain.Tests</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Test</ProjectType>
+  <ProjectGuid>aa7dd109-a894-4587-8d7d-49a68b2c8a86</ProjectGuid>
+  <FullPath>C:\Users\Equipo\Documents\SebasFuentes\lab-2025-i-cps-u1-01-csharp-SebastianFuentesAvalos\Bank\Bank.Domain.Tests\Bank.Domain.Tests.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="C:\Users\Equipo\Documents\SebasFuentes\lab-2025-i-cps-u1-01-csharp-SebastianFuentesAvalos\Bank\.sonarqube\conf\9\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePaths">C:\Users\Equipo\Documents\SebasFuentes\lab-2025-i-cps-u1-01-csharp-SebastianFuentesAvalos\Bank\.sonarqube\out\9\Issues.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPaths">C:\Users\Equipo\Documents\SebasFuentes\lab-2025-i-cps-u1-01-csharp-SebastianFuentesAvalos\Bank\.sonarqube\out\9</Property>
+    <Property Name="sonar.cs.scanner.telemetry">C:\Users\Equipo\Documents\SebasFuentes\lab-2025-i-cps-u1-01-csharp-SebastianFuentesAvalos\Bank\.sonarqube\out\9\Telemetry.json</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+  <TargetFramework>net9.0</TargetFramework>
+</ProjectInfo>
