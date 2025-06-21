@@ -4,26 +4,34 @@ namespace Bank.Domain.Models
     {
         private readonly string m_customerName;
         private double m_balance;
-        private BankAccount() { }
+        
+        private BankAccount() 
+        { 
+            m_customerName = string.Empty; // Inicializar para evitar warnings
+        }
+        
         public BankAccount(string customerName, double balance)
         {
-            m_customerName = customerName;
+            m_customerName = customerName ?? throw new ArgumentNullException(nameof(customerName));
             m_balance = balance;
         }
+        
         public string CustomerName { get { return m_customerName; } }
         public double Balance { get { return m_balance; }  }
+        
         public void Debit(double amount)
         {
             if (amount > m_balance)
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException(nameof(amount));
             if (amount < 0)
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException(nameof(amount));
             m_balance -= amount;
         }
+        
         public void Credit(double amount)
         {
             if (amount < 0)
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException(nameof(amount));
             m_balance += amount;
         }
     }

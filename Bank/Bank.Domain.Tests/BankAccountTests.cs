@@ -35,5 +35,42 @@ namespace Bank.Domain.Tests
             double actual = account.Balance;
             Assert.AreEqual(expected, actual, 0.001, "Account not credited correctly");
         }
+
+        [TestMethod]
+        public void Constructor_SetsPropertiesCorrectly()
+        {
+            // Arrange
+            string customerName = "John Doe";
+            double balance = 100.0;
+
+            // Act
+            BankAccount account = new BankAccount(customerName, balance);
+
+            // Assert
+            Assert.AreEqual(customerName, account.CustomerName);
+            Assert.AreEqual(balance, account.Balance);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Debit_WithNegativeAmount_ThrowsException()
+        {
+            // Arrange
+            BankAccount account = new BankAccount("Test", 100.0);
+
+            // Act & Assert
+            account.Debit(-10.0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Credit_WithNegativeAmount_ThrowsException()
+        {
+            // Arrange
+            BankAccount account = new BankAccount("Test", 100.0);
+
+            // Act & Assert
+            account.Credit(-10.0);
+        }
     }
 }
